@@ -1,7 +1,7 @@
-FROM debian:stable-slim
+FROM node:slim
 
-LABEL "maintainer"="maddox <jon@jonmaddox.com>"
-LABEL "repository"="https://github.com/maddox/actions"
+LABEL "maintainer"="andrewyalung <andrewy@axosoft.com>"
+LABEL "repository"="https://github.com/andrewyalung/actions"
 LABEL "version"="1.0.1"
 
 LABEL "com.github.actions.name"="Wait for 200"
@@ -9,8 +9,8 @@ LABEL "com.github.actions.description"="Poll a URL until it returns a 200 HTTP s
 LABEL "com.github.actions.icon"="refresh-cw"
 LABEL "com.github.actions.color"="blue"
 
-RUN apt-get update && apt-get install -y curl
+COPY . .
 
-ADD entrypoint.sh /entrypoint.sh
+RUN npm install
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["node", "/index.js"]
